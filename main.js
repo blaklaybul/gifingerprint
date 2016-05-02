@@ -7,6 +7,19 @@ function init(date){
 
 }
 
+function init(test){
+    var width = 1200,
+    height = 800;
+
+    var svg = d3.select("#main").append("svg").attr("id","chart").attr("width", width).attr("height", height);
+
+    svg.append("rect")
+    .attr("class", "bg-rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "#00000")
+}
+
 var Map = function(date){
 
   var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-03-07', '2016-03-08', '2016-03-09', '2016-03-10',
@@ -100,4 +113,4 @@ var Map = function(date){
   });
 }
 
-init("2016-03-03");
+initTest("2016-03-03");
