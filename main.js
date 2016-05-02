@@ -33,13 +33,13 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
 
     var svg = d3.select("#main")
         .append("svg")
-        .attr("id","chart")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .attr("id","chart");
 
     var gridWidth = d3.max(states, function(d) { return d.x; }) + 1,
         gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
-        cellSize = 50;
+        cellSize = 75;
 
     svg.append("rect")
         .attr("width", "100%")
@@ -47,7 +47,7 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
         .attr("fill", "#29293d")
 
 
-    var file = "map/" +date + ".json";
+    var file = date + ".json";
 
     d3.json(file, function(json){
 
@@ -101,7 +101,7 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
 
         bg.append("image")
                   .data(states)
-                  .attr("xlink:href", function(d, i) { return "gifs/" + defaultGif + ".gif"; })
+                  .attr("xlink:href", function(d, i) { return defaultGif + ".gif"; })
                   .attr("x", -cellSize/2)
                   .attr("y", -cellSize/2)
                   .attr("width", cellSize)
@@ -120,7 +120,7 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
         state.append("image")
             .data(json)
               .attr("xlink:href", function(d, i) {
-                  return "gifs/" + d.trendMapped + ".gif";
+                  return d.trendMapped + ".gif";
               })
               .attr("x", -cellSize/2)
               .attr("y", -cellSize/2)
