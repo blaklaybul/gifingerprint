@@ -29,9 +29,6 @@ color: white;
 .axis {
   font: 14px sans-serif;
   font-color: white;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
 }
 
 .axis .domain {
