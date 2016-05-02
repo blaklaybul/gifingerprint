@@ -84,7 +84,7 @@ handle.append('text')
 
 slider
   .call(brush.event)
-  
+
 
 function brushed() {
   var value = brush.extent()[0];
