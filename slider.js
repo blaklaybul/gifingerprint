@@ -31,7 +31,7 @@ var brush = d3.svg.brush()
   .extent([startingValue, startingValue])
   .on("brush", brushed);
 
-var svg = d3.select("#slide").append("svg")
+var svg = d3.select("#main").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -84,7 +84,7 @@ handle.append('text')
 
 slider
   .call(brush.event)
-
+  
 
 function brushed() {
   var value = brush.extent()[0];
@@ -96,7 +96,7 @@ function brushed() {
 
   handle.attr("transform", "translate(" + timeScale(value) + ",0)");
   handle.select('text').text(formatDate(value));
-  d3.selectAll("#chart").remove();
+
   init(formatDate2(value));
 
 }
