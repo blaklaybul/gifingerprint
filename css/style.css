@@ -1,0 +1,58 @@
+body{
+    background-color: #29293d
+}
+
+.state rect {
+  fill: #000;
+}
+
+.state text {
+  font: 48px sans-serif;
+  text-anchor: middle;
+  fill: white;
+
+}
+
+#main {
+  width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.handle-text {
+font: 14px sans-serif;
+color: white;
+  text-shadow: none;
+  text-rendering: optimizeLegibility;
+
+}
+.axis {
+  font: 14px sans-serif;
+  font-color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.axis .domain {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .3;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+.axis .halo {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+.slider .handle-circle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: 1;
+  stroke-width: 0px;
+  cursor: crosshair;
+}

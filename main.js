@@ -1,8 +1,7 @@
 
 function init(date){
 
-d3.selectAll(".state").remove();
-d3.selectAll(".state").remove();
+d3.selectAll("#chart").remove();
 new Map(date);
 
 }
@@ -18,6 +17,8 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
 
  var totalDays = filedates.length;
 
+    var width = 1200;
+    var height = 800;
 
     var states = [];
 
@@ -30,12 +31,15 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
       });
     });
 
-    var svg = d3.select("svg").attr("id","chart"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height");
+    var svg = d3.select("#main")
+        .append("svg")
+        .attr("id","chart")
+        .attr("width", width)
+        .attr("height", height);
+
     var gridWidth = d3.max(states, function(d) { return d.x; }) + 1,
         gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
-        cellSize = 100;
+        cellSize = 50;
 
     svg.append("rect")
         .attr("width", "100%")
