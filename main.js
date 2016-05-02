@@ -34,9 +34,6 @@ var Map = function(date){
 
   var svg = d3.select("#main").append("svg").attr("id","chart").attr("width", width).attr("height", height);
 
-
-  svg.append("rect").attr("x",0).attr("y", 0).attr("width", 1000).attr("height",1000).style("fill", "black");
-
   var gridWidth = d3.max(states, function(d) { return d.x; }) + 1,
   gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
   cellSize = 100;
