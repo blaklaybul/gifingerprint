@@ -1,9 +1,10 @@
 
 function init(date){
-
-  d3.selectAll(".bg-rect").remove();
-  d3.selectAll(".states-group").remove();
+    d3.selectAll("#chart").remove();
+  // d3.selectAll(".bg-rect").remove();
+  // d3.selectAll(".states-group").remove();
   new Map(date);
+
 }
 
 var Map = function(date){
@@ -28,10 +29,13 @@ var Map = function(date){
     });
   });
 
-  var svg = d3.select("svg").attr("id","chart"),
-  width = +svg.attr("width"),
-  height = +svg.attr("height");
+  var width = 1200,
+  height = 800;
 
+  var svg = d3.select("#main").append("svg").attr("id","chart").attr("width", width).attr("height", height);
+
+
+  svg.append("rect").attr("x",0).attr("y", 0).attr("width", 1000).attr("height",1000).style("fill", "black");
 
   var gridWidth = d3.max(states, function(d) { return d.x; }) + 1,
   gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
@@ -97,8 +101,6 @@ var Map = function(date){
     // .text(function(d) { return d.stateName + " " + d.trendMapped; })
 
   });
-
-  svg.append("rect").attr("x",0).attr("y", 0).attr("width", 1000).attr("height",1000).style("fill", "black");
 }
 
 init("2016-03-03");
