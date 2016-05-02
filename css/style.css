@@ -1,4 +1,4 @@
-body {
+/*body {
   font: 14px sans-serif;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -9,7 +9,7 @@ body {
   width: 1200px;
   margin: 0 auto;
   text-align: center;
-}
+}*/
 
 .handle-text {
   text-shadow: none;

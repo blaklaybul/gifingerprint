@@ -7,18 +7,6 @@ function init(date){
 
 }
 
-function init(test){
-    var width = 1200,
-    height = 800;
-
-    var svg = d3.select("#main").append("svg").attr("id","chart").attr("width", width).attr("height", height);
-
-    svg.append("rect")
-    .attr("class", "bg-rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "#00000")
-}
 
 var Map = function(date){
 
@@ -42,8 +30,8 @@ var Map = function(date){
     });
   });
 
-  var width = 1200,
-  height = 800;
+  var width = 800,
+  height = 400;
 
   var svg = d3.select("#main").append("svg").attr("id","chart").attr("width", width).attr("height", height);
 
@@ -113,4 +101,4 @@ var Map = function(date){
   });
 }
 
-initTest("2016-03-03");
+init("2016-03-03");
