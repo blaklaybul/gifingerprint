@@ -52,7 +52,9 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
     d3.json(file, function(json){
 
         var data = json;
-        var defaultGif = data[data.findIndex(x=>x.stateName=="XX")].trendMapped;
+        var defaultGif = data[data.findIndex(function(x) {
+            return x.stateName == "XX";
+        })].trendMapped;
 
 
         var bg = svg.append("g")
@@ -74,8 +76,8 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
             .attr("id", function(d) { return d.name })
             .attr("class", "state")
             .attr("transform", function(d) {
-                    var forx = states[states.findIndex(x => x.name==d.stateName)].x;
-                    var fory = states[states.findIndex(x => x.name==d.stateName)].y;
+                    var forx = states[states.findIndex(function(x){ return x.name==d.stateName;})].x;
+                    var fory = states[states.findIndex(function(x){ return x.name==d.stateName;})].y;
                     return "translate(" + (forx - gridWidth / 2) * cellSize + "," + (fory - gridHeight / 2) * cellSize + ")";
             });
 
