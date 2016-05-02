@@ -29,7 +29,8 @@ startingValue = new Date('2016-03-04');
 var brush = d3.svg.brush()
   .x(timeScale)
   .extent([startingValue, startingValue])
-  .on("brush", brushed);
+  .on("brush", brushed)
+  .on("brushend", brushended);
 
 var svg = d3.select("#slider").append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -96,6 +97,18 @@ function brushed() {
 
   handle.attr("transform", "translate(" + timeScale(value) + ",0)");
   handle.select('text').text(formatDate(value));
+
+  //init(formatDate2(value));
+
+}
+
+function brushended() {
+  var value = brush.extent()[0];
+
+  if (d3.event.sourceEvent) { // not a programmatic event
+    value = timeScale.invert(d3.mouse(this)[0]);
+    brush.extent([value, value]);
+  }
 
   init(formatDate2(value));
 
