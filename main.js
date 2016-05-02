@@ -98,3 +98,5 @@ var Map = function(date){
 
   });
 }
+
+init("2016-03-03");
