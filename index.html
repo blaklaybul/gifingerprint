@@ -20,7 +20,7 @@ input[type=range]{
 }
 
 input[type=range]::-webkit-slider-runnable-track {
-    width: 300px;
+    width: 100%;
     height: 5px;
     background: #ddd;
     border: none;
@@ -66,8 +66,9 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 }
 
 </style>
-<svg width="1200" height="800"></svg>
-<input id="slider" type="range" name="slider" min="0" max="5" value="0" step="1"/>
+<div align = "center" ><svg width="1200" height="800"></svg></div>
+<br><br><br><br>
+<div align = "center"><input id="slider" type="range" name="slider" min="0" max="5" value="0" step="1"/></div>
 <script id="grid" type="text/plain">
 XX                            ME
                WI          VT NH
@@ -78,7 +79,7 @@ CA UT CO NE MO KY WV VA MD DE
          OK LA MS AL GA
 HI AK    TX             FL
 </script>
-<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
 function init(date){
