@@ -4,9 +4,9 @@ formatDate2 = d3.time.format("%Y-%m-%d");
 // parameters
 var margin = {
     top: 10,
-    right: 20,
+    right: 80,
     bottom: 10,
-    left: 20
+    left: 80
   },
   width = 960 - margin.left - margin.right,
   height = 100 - margin.bottom - margin.top;
@@ -51,8 +51,7 @@ svg.append("g")
     return formatDate(d);
   })
   .tickSize(0)
-  .tickPadding(12)
-  .tickValues([timeScale.domain()[0], timeScale.domain()[1]]))
+  .tickPadding(30))
   .select(".domain")
   .select(function() {
     console.log(this);
@@ -73,10 +72,10 @@ slider.select(".background")
 var handle = slider.append("g")
   .attr("class", "handle")
 
-  handle.append("circle")
+handle.append("circle")
     .attr("class", "handle-circle")
     .attr("transform", "translate(0," + height / 2 + ")")
-    .attr("r", 9);
+    .attr("r", 15);
 
 handle.append('text')
   .attr("class", "handle-text")
@@ -96,7 +95,26 @@ function brushed() {
   }
 
   handle.attr("transform", "translate(" + timeScale(value) + ",0)");
-  handle.select('text').text(formatDate(value));
+  handle.select('text').style("fill", "white").text(formatDate(value));
+
+  // d3.selectAll("text").remove();
+  //
+  // d3.selectAll(".state").append("rect").attr("x", -75 / 2)
+  //     .attr("y", -75 / 2)
+  //     .attr("width", 75)
+  //     .attr("height", 75)
+  //     .style("fill", "#29293d")
+  //     .style("opacity", 0.05);
+  //
+  //   d3.selectAll(".state").append("text").attr("dy", "0.35em")
+  //     .style("fill", "whites")
+  //     .style("opacity", 1)
+  //     .text(function(d) { return d.name; });
+  //
+  //     d3.selectAll(".state").append("text").attr("dy", "0.35em")
+  //       .style("fill", "whites")
+  //       .style("opacity", 1)
+  //       .text(function(d) { return d.name; });
 
   //init(formatDate2(value));
 

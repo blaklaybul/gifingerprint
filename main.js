@@ -8,14 +8,6 @@ new Map(date);
 
 var Map = function(date){
 
-var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-03-07', '2016-03-08', '2016-03-09', '2016-03-10',
- '2016-03-11', '2016-03-12', '2016-03-13', '2016-03-14', '2016-03-15', '2016-03-16', '2016-03-17', '2016-03-18',
- '2016-03-19', '2016-03-20', '2016-03-21', '2016-03-22', '2016-03-23', '2016-03-24', '2016-03-25', '2016-03-26',
- '2016-03-27', '2016-03-28', '2016-03-29', '2016-03-30', '2016-03-31', '2016-04-01', '2016-04-02', '2016-04-03',
- '2016-04-04', '2016-04-05', '2016-04-06', '2016-04-07', '2016-04-08', '2016-04-09', '2016-04-10', '2016-04-11',
- '2016-04-12', '2016-04-13', '2016-04-14', '2016-04-15', '2016-04-16', '2016-04-17'];
-
- var totalDays = filedates.length;
 
     var width = 1200;
     var height = 800;
@@ -39,39 +31,44 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
 
     var gridWidth = d3.max(states, function(d) { return d.x; }) + 1,
         gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
-        cellSize = 75;
+        cellSize = 100;
 
-    svg.append("rect")
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("fill", "#29293d")
-
-
-    var file = date + ".json";
+    var file = "map/" + date + ".json";
 
     d3.json(file, function(json){
 
         var data = json;
+
         var defaultGif = data[data.findIndex(function(x) {
             return x.stateName == "XX";
         })].trendMapped;
 
+        var defaultTrend = data[data.findIndex(function(x) {
+            return x.stateName == "XX";
+        })].trendName;
 
-        var bg = svg.append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-          .selectAll(".state")
-            .data(states)
-          .enter().append("g")
-            .attr("id", function(d) { return d.name })
-            .attr("class", "state")
-            .attr("transform", function(d) {
-                    return "translate(" + (d.x - gridWidth / 2) * cellSize + "," + (d.y - gridHeight / 2) * cellSize + ")";
-            });
+        states.forEach(function(d){
+            var result = data.filter(function (entry) { return entry.stateName === d.name; });
+
+            if (result.length>0) {
+                d.trendName = result[0]['trendName'];
+                d.trendMapped = result[0]['trendMapped'];
+                d.stateName = result[0]['stateName'];
+            }
+
+            else {
+                d.stateName = d.name;
+                d.trendMapped = defaultGif;
+                d.trendName = defaultTrend;
+            }
+        })
+
+        states = states.filter(function(entry){return entry.stateName != "XX";})
 
         var state = svg.append("g")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
           .selectAll(".state")
-            .data(json)
+            .data(states)
           .enter().append("g")
             .attr("id", function(d) { return d.name })
             .attr("class", "state")
@@ -81,48 +78,11 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
                     return "translate(" + (forx - gridWidth / 2) * cellSize + "," + (fory - gridHeight / 2) * cellSize + ")";
             });
 
-        bg.append("rect")
-                .attr("x", -cellSize / 2)
-                .attr("y", -cellSize / 2)
-                .attr("width", cellSize)
-                .attr("height", cellSize)
-                .style("fill", "black")
-                .style("opacity", 0)
-                .on("mouseover", function(d){
-                    d3.select(this)
-                    .style("opacity", 0.8);
-                })
-                .on("mouseout", function(d){
-                    d3.select(this)
-                    .style("opacity", 0);
-                });
-
-
-
-
-
-        bg.append("image")
-                  .data(states)
-                  .attr("xlink:href", function(d, i) { return defaultGif + ".gif"; })
-                  .attr("x", -cellSize/2)
-                  .attr("y", -cellSize/2)
-                  .attr("width", cellSize)
-                  .attr("height", cellSize)
-                  .style("opactiy", 1.0)
-
-      state.append("rect")
-                        .attr("x", -cellSize / 2)
-                        .attr("y", -cellSize / 2)
-                        .attr("width", cellSize)
-                        .attr("height", cellSize)
-                        .style("fill", "#29293d")
-                        .style("opacity", 1);
-
 
         state.append("image")
-            .data(json)
+            .data(states)
               .attr("xlink:href", function(d, i) {
-                  return d.trendMapped + ".gif";
+                  return "gif/" + d.trendMapped + ".gif";
               })
               .attr("x", -cellSize/2)
               .attr("y", -cellSize/2)
@@ -131,32 +91,19 @@ var filedates =  ['2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-
               .attr("height", cellSize)
               .style("opactiy", 1.0);
 
-
-
-        bg.append("text")
-            .data(states)
-             .attr("dy", "0.35em")
-             .style("fill", "whites")
-             .style("opacity", 0)
-             .text(function(d) { return d.name; })
-             .on("mouseover",function(){
-                 d3.select(this).style("opacity",1);
-             })
-             .on("mouseout",function(){
-                 d3.select(this).style("opacity",0);
-             });
-
          state.append("text")
-             .data(json)
+             .data(states)
               .attr("dy", ".35em")
               .style("fill", "white")
               .style("opacity", 0)
               .text(function(d) { return d.stateName; })
-              .on("mouseover",function(){
+              .on("mouseover",function(d){
                   d3.select(this).style("opacity",1);
+                  d3.select("h1").html("<b>" + d.trendName + "</b>");
               })
               .on("mouseout",function(){
                   d3.select(this).style("opacity",0);
+                  d3.select("h1").html("<b>US Gifingerprint</b>");
               });;
          });
  }
