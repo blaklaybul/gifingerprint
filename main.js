@@ -9,8 +9,8 @@ new Map(date);
 var Map = function(date){
 
 
-    var width = 1200;
-    var height = 800;
+    var width = 1800;
+    var height = 950;
 
     var states = [];
 
@@ -31,7 +31,7 @@ var Map = function(date){
 
     var gridWidth = d3.max(states, function(d) { return d.x; }) + 1,
         gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
-        cellSize = 100;
+        cellSize = 120;
 
     var file = "map/" + date + ".json";
 
