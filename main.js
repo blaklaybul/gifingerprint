@@ -87,6 +87,7 @@ var Map = function(date){
               .attr("x", -cellSize/2)
               .attr("y", -cellSize/2)
               .attr("width", cellSize)
+              .attr("class", "gifImage")
               .attr("id", function(d){return d.stateName + "-" + d.trendMapped})
               .attr("height", cellSize)
               .style("opactiy", 1.0);
