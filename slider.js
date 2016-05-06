@@ -14,7 +14,7 @@ var margin = {
 
 // scale function
 var timeScale = d3.time.scale()
-  .domain([new Date('2016-03-03'), new Date('2016-05-07')])
+  .domain([new Date('2016-03-04'), new Date('2016-05-07')])
   .range([0, width])
   .clamp(true);
 

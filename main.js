@@ -33,12 +33,13 @@ var Map = function(date){
         gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
         cellSize = 120;
 
-    var file = "map/" + date + ".json";
+    var file = "map_TEST/" + date + ".json";
 
     d3.json(file, function(json){
 
-        var data = json;
 
+        var data = json;
+        console.log(date);
         var defaultGif = data[data.findIndex(function(x) {
             return x.stateName == "XX";
         })].trendMapped;
@@ -49,11 +50,11 @@ var Map = function(date){
 
         states.forEach(function(d){
             var result = data.filter(function (entry) { return entry.stateName === d.name; });
-
             if (result.length>0) {
                 d.trendName = result[0]['trendName'];
                 d.trendMapped = result[0]['trendMapped'];
                 d.stateName = result[0]['stateName'];
+                d.trendDate = result[0]['trendDate'];
             }
 
             else {
