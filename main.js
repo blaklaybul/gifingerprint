@@ -100,11 +100,11 @@ var Map = function(date){
               .text(function(d) { return d.stateName; })
               .on("mouseover",function(d){
                   d3.select(this).style("opacity",1);
-                  d3.select("h1").html("<b>" + d.trendName + "</b>");
+                  d3.select("h1").style("opacity", 1.0).html("<b>" + d.trendName + "</b>");
               })
               .on("mouseout",function(){
                   d3.select(this).style("opacity",0);
-                  d3.select("h1").html("<b>US Gifingerprint</b>");
+                  d3.select("h1").style("opacity", 0.1).html("<b>US Gifingerprint</b>");
               });;
          });
  }
